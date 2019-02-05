@@ -116,6 +116,15 @@ func (r *ExecTranAuResponse) HasErrorAuExceedAmountLimit() bool {
 	return r.BaseResponse.HasErrorDetails(client.ErrAuExceedAmountLimit)
 }
 
+// HasErrorAuCustomerProblem checks if the error is customer side problem.
+func (r *ExecTranAuResponse) HasErrorAuCustomerProblem() bool {
+	switch {
+	case r.BaseResponse.HasErrorDetails(client.ErrAuSettlementFailed):
+		return true
+	}
+	return false
+}
+
 // ValidateCheckString validates CheckString to avoid falsification.
 func (r *ExecTranAuResponse) ValidateCheckString(accessID, shopID, shopPass string) bool {
 	return client.ValidateCheckString(r.CheckString, r.OrderID, accessID, shopID, shopPass)
