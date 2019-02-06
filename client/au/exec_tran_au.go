@@ -116,8 +116,8 @@ func (r *ExecTranAuResponse) HasErrorAuExceedAmountLimit() bool {
 	return r.BaseResponse.HasErrorDetails(client.ErrAuExceedAmountLimit)
 }
 
-// HasErrorAuCustomerProblem checks if the error is customer side problem.
-func (r *ExecTranAuResponse) HasErrorAuCustomerProblem() bool {
+// HasErrorAuGeneralCustomerIssue checks if the error is a general customer issue or not.
+func (r *ExecTranAuResponse) HasErrorAuGeneralCustomerIssue() bool {
 	switch {
 	case r.BaseResponse.HasErrorDetails(client.ErrAuSettlementFailed):
 		return true
